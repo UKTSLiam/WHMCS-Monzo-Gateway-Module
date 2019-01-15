@@ -48,7 +48,11 @@ function monzo_link($params) {
 }
 
 function monzo_convert($amount, $from, $to) {
-
+  
+  if($from == $to) {
+      return ($amount * round($amount, 4));
+  }
+    
   $conv_id = "{$from}_{$to}";
   $string = file_get_contents("http://free.currencyconverterapi.com/api/v3/convert?q=$conv_id&compact=ultra");
   $json_a = json_decode($string, true);
